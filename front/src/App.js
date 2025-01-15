@@ -1,11 +1,11 @@
 import React from "react";
-import Form from "../src/Page/Form.js";
-import Login from "../src/Page/Login.js"
+import MainRouter from "./router/MainRouter";
+
 
 function App() {
   return (
     <div>
-      <Login />
+      <MainRouter />
     </div>
   );
 }
