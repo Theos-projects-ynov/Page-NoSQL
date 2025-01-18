@@ -7,9 +7,14 @@ function MainRouter() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={
+                <Route path="/login" element={
                     <>
                         <Login/>
+                    </>
+                }/>
+                <Route path="/" element={
+                    <>
+                        <HomePage/>
                     </>
                 }/>
             </Routes>

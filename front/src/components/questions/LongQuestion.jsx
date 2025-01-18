@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function ShortQuestion({ index, question, setQuestion }) {
+function LongQuestion({ index, question, setQuestion }) {
     const [title, setTitle] = React.useState(question[index].title || "");
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function ShortQuestion({ index, question, setQuestion }) {
             <h1>Short Question</h1>
 
             <p>Question {index + 1}</p>
-            <p>{`Title : ${question[index].title}`}<input type="text" value={title} onChange={handleChangeTitle} /> </p>
+            <p>{`Title : ${question[index].title}`}<textarea value={title} onChange={handleChangeTitle} /> </p>
             {/*<p>{`Description: ${question.description}`}</p>*/}
             {/* Vous pouvez ajouter plus de champs pour modifier la question ici */}
             <br/>
@@ -27,4 +27,4 @@ function ShortQuestion({ index, question, setQuestion }) {
     );
 }
 
-export default ShortQuestion;
+export default LongQuestion;
