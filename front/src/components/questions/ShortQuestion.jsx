@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 function ShortQuestion({ index, question, setQuestion }) {
-    const [title, setTitle] = React.useState(question[index].title || "");
+    const [title, setTitle] = React.useState(question[index].title);
 
     useEffect(() => {
         console.log("\n\n\nTest:");
@@ -11,7 +11,7 @@ function ShortQuestion({ index, question, setQuestion }) {
     const handleChangeTitle = (e) => {
         setTitle(e.target.value);
         question[index].title = e.target.value;
-        console.log(title);
+        console.log("titre : ", title);
     }
 
     return (
