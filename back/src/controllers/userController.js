@@ -45,29 +45,33 @@ const createUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
+    console.log("test login");
     try {
-        const {email, password} = req.body;
-        let user = await User.findOne({email});
-        user = user.toObject();
-        if (user === null) {
-            res.status(404).send('Utilisateur non trouvé');
+        const { email, password } = req.body;
+        let user = await User.findOne({ email });
+
+        // Si l'utilisateur n'existe pas
+        if (!user) {
+            return res.status(404).send({ "message": 'Utilisateur non trouvé' });
         }
+
+        // Vérification du mot de passe
         const isPasswordValid = await bcrypt.compare(password, user.password);
-
         if (!isPasswordValid) {
-            res.status(401).send('Mot de passe incorrect');
+            return res.status(401).send('Mot de passe incorrect');
         }
 
+        // Génération du token
+        user = user.toObject();
         user['token'] = generateToken(user._id.toString());
 
-        console.log("user : ",user);
-
-        res.status(200).send({"message": "Connexion réussie",user});
+        res.status(200).send({ "message": "Connexion réussie", user });
     } catch (error) {
-        console.log("error : ",error);
-        res.status(400).send('Erreur lors de la création de l\'utilisateur');
+        console.log("Error:", error);
+        res.status(400).send('Erreur lors de la connexion');
     }
-}
+};
+
 
 export {
     getAllUser,

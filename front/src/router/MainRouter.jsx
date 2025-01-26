@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "../Page/HomePage";
+import CreateForm from "../Page/CreateForm";
 import Login from "../Page/Login";
+import HomePage from "../Page/HomePage";
 
 function MainRouter() {
     return (
@@ -10,6 +11,11 @@ function MainRouter() {
                 <Route path="/login" element={
                     <>
                         <Login/>
+                    </>
+                }/>
+                <Route path="/createform" element={
+                    <>
+                        <CreateForm/>
                     </>
                 }/>
                 <Route path="/" element={
