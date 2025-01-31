@@ -1,16 +1,16 @@
 import React from 'react'
 import FormCreation from "./FormCreation";
 // import img from '../assets/img.png';
-// import '../styles/style.css'
+import '../Style/createForm.css';
 
 function CreateForm() {
 
     return (
         <>
-            <h1>FormCreate</h1>
-            <p>Home Page</p>
+            <h1>Form Creation</h1>
+            <p>Form Creation</p>
 
-            <FormCreation/>
+            <FormCreation />
             {/*HERE PLACE ALL FORMS CREATE*/}
 
             {/* <img src={img} alt="img" /> */}

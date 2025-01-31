@@ -16,13 +16,21 @@ function LongQuestion({ index, question, setQuestion }) {
 
     return (
         <>
-            <h1>Short Question</h1>
-
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', marginTop: '10px' }}>
+                <p style={{ margin: 0 }}>Title :</p>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={handleChangeTitle}
+                    style={{ flex: 1 }} // Cela permet à l'input d'occuper l'espace disponible
+                />
+            </div>
             <p>Question {index + 1}</p>
-            <p>{`Title : ${question[index].title}`}<textarea value={title} onChange={handleChangeTitle} /> </p>
+
+            <p><textarea /> </p>
             {/*<p>{`Description: ${question.description}`}</p>*/}
             {/* Vous pouvez ajouter plus de champs pour modifier la question ici */}
-            <br/>
+            <br />
         </>
     );
 }
