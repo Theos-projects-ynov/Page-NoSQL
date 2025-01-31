@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-function ShortQuestion({ index, question, setQuestion }) {
+function CheckboxQuestion({ index, question, setQuestion }) {
     const [title, setTitle] = React.useState(question[index].title || "");
-
-
     const [checkboxes, setCheckboxes] = useState({});
     const [inputText, setInputText] = useState('');
 
@@ -38,7 +36,15 @@ function ShortQuestion({ index, question, setQuestion }) {
 
     return (
         <>
-            <h1>Short Question</h1>
+            <p><div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', marginTop: '10px' }}>
+                <p style={{ margin: 0 }}>Title :</p>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={handleChangeTitle}
+                    style={{ flex: 1 }} // Cela permet à l'input d'occuper l'espace disponible
+                />
+            </div></p>
             <input
                 type="text"
                 value={inputText}
@@ -48,24 +54,23 @@ function ShortQuestion({ index, question, setQuestion }) {
             <button onClick={addCheckbox}>Ajouter une case à cocher</button>
 
             <p>Question {index + 1}</p>
-            <p>{`Title : ${question[index].title}`}
+            <div>
                 {Object.keys(checkboxes).map((label) => (
-                    <label key={label}>
+                    <label key={label} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                         <input
                             type="checkbox"
                             checked={checkboxes[label]}
                             onChange={() => handleCheckboxChange(label)}
+                            style={{ width: 'auto', height: 'auto' }} // Ne pas laisser l'input checkbox occuper toute la largeur
                         />
-                        {label}
+                        <span>{label}</span>
                     </label>
                 ))}
+            </div>
 
-            </p>
-            {/*<p>{`Description: ${question.description}`}</p>*/}
-            {/* Vous pouvez ajouter plus de champs pour modifier la question ici */}
-            <br/>
+            <br />
         </>
     );
 }
 
-export default ShortQuestion;
+export default CheckboxQuestion;

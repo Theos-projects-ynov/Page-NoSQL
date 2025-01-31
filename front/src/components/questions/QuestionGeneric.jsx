@@ -6,7 +6,7 @@ import CheckboxQuestion from "./CheckboxQuestion";
 // import img from '../assets/img.png';
 // import '../styles/style.css'
 
-function QuestionGeneric({index, question, setQuestion}) {
+function QuestionGeneric({ index, question, setQuestion }) {
     const [selectedOption, setSelectedOption] = useState('');
     const [test, setTest] = useState('');
 
@@ -31,21 +31,23 @@ function QuestionGeneric({index, question, setQuestion}) {
     }, [question]);
 
     return (
-
         <div id="test">
-            <br/>
-
-            Type : <select id="dropdown" name="options" value={selectedOption}
-                           onChange={handleChange}>
-            <option value=""></option>
-            <option value="short_question">Short Question</option>
-            <option value="long_question">Long Question</option>
-            <option value="radio_question">Radio Question</option>
-            <option value="checkbox_question">Checkbox Question</option>
-        </select>
+            <br />
+            <select
+                id="dropdown"
+                name="options"
+                value={selectedOption}
+                onChange={handleChange}
+                className="question-type-select" // Ajout de la classe ici
+            >
+                <option value=""></option>
+                <option value="short_question">Short Question</option>
+                <option value="long_question">Long Question</option>
+                <option value="radio_question">Radio Question</option>
+                <option value="checkbox_question">Checkbox Question</option>
+            </select>
             {handleSubmit()}
         </div>
-
     )
 }
 

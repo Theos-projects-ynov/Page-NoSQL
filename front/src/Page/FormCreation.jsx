@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import ShortQuestion from "../components/questions/ShortQuestion";
+import React, { useEffect } from 'react';
 import QuestionGeneric from "../components/questions/QuestionGeneric";
 import { submitForm } from "../service/formService";
 
@@ -7,7 +6,7 @@ function FormCreation() {
     const [question, setQuestion] = React.useState([]);
     const [form, setForm] = React.useState({
         name: "Nom du formulaire",
-        title: "Titre",
+        title: "Titre", // Titre du formulaire
         description: "LA GROS DESCRIPTION",
         questions: question,
         age: 25,
@@ -15,14 +14,36 @@ function FormCreation() {
         authorId: "6780ffdbaae783e48e36d1fd"
     });
 
+    // Fonction pour modifier le titre du formulaire
+    const handleTitleChange = (e) => {
+        setForm({
+            ...form,
+            title: e.target.value
+        });
+    };
+
+    // Fonction pour modifier le titre d'une question
+    const handleQuestionTitleChange = (index, e) => {
+        const updatedQuestions = [...question];
+        updatedQuestions[index].title = e.target.value;  // Modifie le titre de la question spécifique
+        setQuestion(updatedQuestions);  // Met à jour les questions
+    };
+
+    // Fonction pour modifier le type de la question
+    const handleQuestionTypeChange = (index, e) => {
+        const updatedQuestions = [...question];
+        updatedQuestions[index].type = e.target.value; // Modifie le type de la question
+        setQuestion(updatedQuestions); // Met à jour les questions
+    };
+
     const handleAddQuestion = (e) => {
         e.preventDefault();
         setQuestion([
             ...question,
             {
-                type: "short",
-                title: "test",
-                description: "tesst",
+                type: "short",  // Type par défaut
+                title: "Nouvelle question",  // Valeur par défaut
+                description: "Description",
                 required: false
             }
         ]);
@@ -46,23 +67,41 @@ function FormCreation() {
     }, [question]);
 
     return (
-        <>
-            <h1>Form Creation</h1>
-            <p>Form Creation</p>
+        <div className="form-creation">
+            <div className="form-header">
+                <label htmlFor="form-title">Form Title:</label>
+                <input
+                    id="form-title"
+                    type="text"
+                    value={form.title}
+                    onChange={handleTitleChange}
+                    placeholder="Enter form title"
+                    className="form-title-input"
+                />
+            </div>
 
             <button onClick={handleAddQuestion}>Add Question</button>
 
             {question.map((q, index) => (
-                <QuestionGeneric
-                    index={index}
-                    question={question}
-                    setQuestion={setQuestion}
-                />
+                <div key={index} className="question-section">
+                    <div className="question-title-container">
+                        { }
+                        <div className="question-type-container">
+                            {/* Si le type est déjà défini, on ne montre pas le label */}
+
+                        </div>
+
+                    </div>
+                    <QuestionGeneric
+                        index={index}
+                        question={question}
+                        setQuestion={setQuestion}
+                    />
+                </div>
             ))}
 
             <button onClick={submit}>Submit</button>
-
-        </>
+        </div>
     );
 }
 

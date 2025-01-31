@@ -16,13 +16,23 @@ function ShortQuestion({ index, question, setQuestion }) {
 
     return (
         <>
-            <h1>Short Question</h1>
+            {/* Utilisation de div avec flex pour aligner le titre et l'input */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', marginTop: '10px' }}>
+                <p style={{ margin: 0 }}>Title :</p>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={handleChangeTitle}
+                    style={{ flex: 1 }} // Cela permet à l'input d'occuper l'espace disponible
+                />
+            </div>
 
+            {/* <h1>Short Question</h1> */}
             <p>Question {index + 1}</p>
-            <p>{`Title : ${question[index].title}`}<input type="text" value={title} onChange={handleChangeTitle} /> </p>
+            <input type="text" />
             {/*<p>{`Description: ${question.description}`}</p>*/}
             {/* Vous pouvez ajouter plus de champs pour modifier la question ici */}
-            <br/>
+            <br />
         </>
     );
 }
