@@ -45,7 +45,6 @@ const Login = () => {
             <form className="login-form" onSubmit={handleSubmit}>
                 <h1 onClick={testToken}>Login</h1>
 
-                {/* Affichage des messages d'erreur */}
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                 <div className="form-group">
