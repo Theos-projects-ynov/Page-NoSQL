@@ -25,7 +25,7 @@ function MainRouter() {
                 }/>
                 <Route path="/" element={
                     <>
-                        <NavBar />
+                        <NavBar/>
                         <HomePage/>
                     </>
                 }/>
