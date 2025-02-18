@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../Style/login.css";
 import { login } from "../service/userService";
+import { Link } from 'react-router-dom'; // Importation de Link pour la redirection
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -36,18 +37,13 @@ const Login = () => {
         }
     };
 
-    const testToken = () => {
-        console.log("localStorage.getItem('token') : ", localStorage.getItem('token'));
-    }
-
     return (
         <div id="containerLoginPage">
             <div className="login-container">
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <h1 onClick={testToken}>Login</h1>
+                    <h1>Login</h1>
 
-                    {errorMessage &&
-                        <p className="error-message">{errorMessage}</p>}
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
@@ -73,10 +69,14 @@ const Login = () => {
                         />
                     </div>
 
-                    <button type="submit" className="submit-button"
-                            disabled={isLoading}>
+                    <button type="submit" className="submit-button" disabled={isLoading}>
                         {isLoading ? 'Logging in...' : 'Login'}
                     </button>
+
+                    {/* Lien pour la redirection vers la page d'inscription */}
+                    <p className="redirect-link">
+                        Don't have an account? <Link to="/register">Create one here</Link>
+                    </p>
                 </form>
             </div>
         </div>

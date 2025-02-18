@@ -9,6 +9,7 @@ import FormEdit from "../Page/FormEdit";
 import FormStats from "../Page/FormStats";
 import NavBar from "../components/header/NavBar";
 import UserConnected from "../components/auth/UserConnected";
+import Register from "../Page/Register";
 
 function MainRouter() {
     return (
@@ -16,40 +17,45 @@ function MainRouter() {
             <Routes>
                 <Route path="/login" element={
                     <>
-                        <Login/>
+                        <Login />
                     </>
-                }/>
+                } />
                 <Route path="/createform" element={
                     <>
-                        <CreateForm/>
+                        <CreateForm />
                     </>
-                }/>
+                } />
                 <Route path="/" element={
                     <UserConnected>
-                        <NavBar/>
-                        <HomePage/>
+                        <NavBar />
+                        <HomePage />
                     </UserConnected>
-                }/>
+                } />
                 <Route path="/profil" element={
                     <>
-                        <Profil/>
+                        <Profil />
                     </>
-                }/>
+                } />
                 <Route path="/form/answer/:id" element={
                     <>
-                        <FormAnswer/>
+                        <FormAnswer />
                     </>
-                }/>
+                } />
                 <Route path="/form/edit/:id" element={
                     <>
-                        <FormEdit/>
+                        <FormEdit />
                     </>
-                }/>
+                } />
                 <Route path="/form/stats/:id" element={
                     <>
-                        <FormStats/>
+                        <FormStats />
                     </>
-                }/>
+                } />
+                <Route path="/register" element={
+                    <>
+                        <Register />
+                    </>
+                } />
 
             </Routes>
         </BrowserRouter>

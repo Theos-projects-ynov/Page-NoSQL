@@ -22,6 +22,28 @@ const login = async (email, password) => {
     }
 };
 
+const register = async (email, password) => {
+    try {
+        console.log("email register : ", email);
+        const response = await fetch(`http://localhost:3000/user/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, password}),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Échec de l'inscription");
+        }
+
+        return response;
+    } catch (error) {
+        console.error("Erreur lors de l'inscription:", error);
+    }
+};
+
 const isConnect = async (token) => {
     // try {
     //     const response = await fetch(`http://localhost:3000/user/isConnect`, {
@@ -45,5 +67,4 @@ const isConnect = async (token) => {
     return true;
 }
 
-
-export { login, isConnect };
+export { login, register, isConnect };
