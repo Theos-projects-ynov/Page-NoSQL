@@ -50,18 +50,15 @@ const login = async (req, res) => {
         const { email, password } = req.body;
         let user = await User.findOne({ email });
 
-        // Si l'utilisateur n'existe pas
         if (!user) {
             return res.status(404).send({ "message": 'Utilisateur non trouvé' });
         }
 
-        // Vérification du mot de passe
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).send('Mot de passe incorrect');
         }
 
-        // Génération du token
         user = user.toObject();
         user['token'] = generateToken(user._id.toString());
 

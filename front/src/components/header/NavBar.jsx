@@ -1,23 +1,29 @@
-import React from 'react'
-import '../../Style/components/header/navBar.sass'
-// import img from '../assets/img.png';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../Style/components/header/navBar.sass';
 
-function NavBar() {
+const NavBar = () => {
     return (
-        <div id="navbar">
-            <div className="logo">
-                <h1>Form</h1>
+        <nav className="navbar">
+            <div className="navbar__logo">
+                <Link to="/"><h1>Piece Form</h1></Link>
             </div>
-            <div className="nav">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/createform">Create Form</a></li>
-                    <li><a href="/profil">Profil</a></li>
-                </ul>
-            </div>
-        </div>
-    )
-}
+            <ul className="navbar__menu">
+                <li className="navbar__item">
+                    <Link to="/">Home</Link>
+                </li>
+                <li className="navbar__item">
+                    <Link to="/"></Link>
+                </li>
+                <li className="navbar__item">
+                    <Link to="/login">login</Link>
+                </li>
+                <li className="navbar__item">
+                    <Link to="/register">register</Link>
+                </li>
+            </ul>
+        </nav>
+    );
+};
 
-export default NavBar
+export default NavBar;

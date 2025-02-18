@@ -2,13 +2,13 @@
 
 const login = async (email, password) => {
     try {
-        console.log("email2 : ",email);
+        console.log("email2 : ", email);
         const response = await fetch(`http://localhost:3000/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({email, password}),
         });
 
         if (!response.ok) {
@@ -17,8 +17,7 @@ const login = async (email, password) => {
         }
 
         return response;
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Erreur lors de la connexion:', error);
     }
 };
@@ -45,5 +44,6 @@ const isConnect = async (token) => {
     // }
     return true;
 }
+
 
 export { login, isConnect };

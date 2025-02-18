@@ -1,40 +1,96 @@
-import React from 'react'
-import { isConnect } from "../service/userService";
-// import img from '../assets/img.png';
-// import '../styles/style.css'
+import React, { useState, useEffect } from 'react';
+import FormCard from "../components/forms/FormCard";
+import "../Style/page/homePage.sass";
+import { getMyForms } from "../service/formService";
+import { jwtDecode } from 'jwt-decode';
 
 function HomePage() {
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [isConnected, setIsConnected] = React.useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [myForms, setMyForms] = useState([]);
+    const [answerForms, setAnswerForms] = useState([]);
+    const [decodedToken, setDecodedToken] = useState(null);
 
-    React.useEffect(() => {
-        IsConnected();
-    }, [])
-
-    const IsConnected = async () => {
-        isConnect(localStorage.getItem('token'))
-            .then((response) => {
-                if (!response.error) {
-                    setIsConnected(true);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                setDecodedToken(decoded);
+                // Supposons que getMyForms renvoie une promesse
+                getMyForms(decoded.id)
+                    .then(res => {
+                        setMyForms(res.data);
+                        setIsLoading(false);
+                    }).catch(error => {
+                    console.error("Erreur lors de la récupération des formulaires :", error);
                     setIsLoading(false);
-                    console.log("connecté");
-                }
-            });
-    }
+                });
+
+            } catch (error) {
+                console.error("Erreur lors du décodage du token JWT :", error);
+                setIsLoading(false);
+            }
+        } else {
+            setIsLoading(false);
+        }
+    }, []);
+
+    const handleCardClick = async (form) => {
+        console.log("Formulaire cliqué :", form, ", decodedToken :", decodedToken);
+    };
+
+    const handleAddForm = () => {
+        console.log("Ajouter un nouveau formulaire");
+    };
 
     return (
-        <div>
-            <h1>Home Page</h1>
-            <p>Home Page</p>
-
-            {isLoading ? <p>Chargement ...</p> :<>
-                    {isConnected ? <p>Vous êtes connecté</p> : <p>Vous n'êtes pas connecté</p>}
-                </>
-            }
-
-            {/* <img src={img} alt="img" /> */}
+        <div id="homepage-container-page">
+            <div className="homepage-container">
+                <h1 className="homePage-titleCategory">My forms</h1>
+                <div id="container-myforms">
+                    {isLoading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        myForms.length === 0 ? (
+                            <p>No form found</p>
+                        ) : (
+                            myForms.map((form, index) => (
+                                <FormCard
+                                    key={form.id + "-" + index}
+                                    name={form.title}
+                                    banner={form.banner}
+                                    onClick={() => handleCardClick(form)}
+                                />
+                            ))
+                        )
+                    )}
+                    <FormCard isEmpty onClick={handleAddForm}/>
+                </div>
+            </div>
+            <div className="homepage-container">
+                <h1 className="homePage-titleCategory">My answers</h1>
+                <div id="container-myforms">
+                    {isLoading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        myForms.length === 0 ? (
+                            <p>No form found</p>
+                        ) : (
+                            myForms.map((form, index) => (
+                                <FormCard
+                                    key={form.id + "-" + index}
+                                    name={form.title}
+                                    banner={form.banner}
+                                    onClick={() => handleCardClick(form)}
+                                />
+                            ))
+                        )
+                    )}
+                    <FormCard isEmpty onClick={handleAddForm}/>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;

@@ -25,5 +25,5 @@ app.use('/answer', answerRoutes);
 const port = 3000;
 
 app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port} \x1b[34m\x1b[1m[http://localhost:${port}]` );
+    console.log(`Serveur démarré sur le port ${port} \x1b[34m\x1b[1m[http://localhost:${port}]`);
 });
