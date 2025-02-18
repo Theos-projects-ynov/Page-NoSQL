@@ -8,6 +8,7 @@ import FormAnswer from "../Page/FormAnswer";
 import FormEdit from "../Page/FormEdit";
 import FormStats from "../Page/FormStats";
 import NavBar from "../components/header/NavBar";
+import UserConnected from "../components/auth/UserConnected";
 
 function MainRouter() {
     return (
@@ -24,10 +25,10 @@ function MainRouter() {
                     </>
                 }/>
                 <Route path="/" element={
-                    <>
+                    <UserConnected>
                         <NavBar/>
                         <HomePage/>
-                    </>
+                    </UserConnected>
                 }/>
                 <Route path="/profil" element={
                     <>

@@ -57,7 +57,7 @@ const getOneFormsById = async (req, res) => {
     }
 }
 
-const getOneFormsByAuthorId = async (req, res) => {
+const getFormsByAuthorId = async (req, res) => {
     try {
         console.log("-get One Form By Author Id-")
         console.log("req.params : ", req.params);
@@ -68,7 +68,7 @@ const getOneFormsByAuthorId = async (req, res) => {
             throw new Error("Id undefined");
         }
 
-        const forms = await Form.findOne({authorId: authorId});
+        const forms = await Form.find({authorId: authorId});
         console.log("forms : ", forms);
 
         res.status(200).json(forms);
@@ -118,7 +118,7 @@ export {
     createForm,
     getAllForms,
     getOneFormsById,
-    getOneFormsByAuthorId,
+    getFormsByAuthorId,
     deleteAllForms,
     deleteOneFormById
 };

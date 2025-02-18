@@ -1,6 +1,18 @@
 /* Login.css */
 
+#containerLoginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
 .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
