@@ -7,9 +7,9 @@ dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
 
 const generateToken = (userId) => {
     const token = jwt.sign(
-        { id: userId },
+        {id: userId},
         process.env.JWT_SECRET,
-        { expiresIn: '1y' }
+        {expiresIn: '1y'}
     );
     console.log("generate token : ", token);
     return token;
@@ -28,18 +28,19 @@ const getAllUser = async (req, res) => {
 const createUser = async (req, res) => {
     console.log("test create user")
     try {
-        let {name, email,password, age} = req.body;
+        let {name, email, password, age} = req.body;
         password = bcrypt.hashSync(password, 10);
 
-        let newUser = new User({name,password, email, age});
-        newUser = newUser.toObject();
+        let newUser = new User({name, password, email, age});
+        // newUser = newUser.toObject();
+
+        await newUser.save();
 
         newUser['token'] = generateToken(newUser._id.toString());
 
-        await newUser.save();
         res.status(201).send(newUser);
     } catch (error) {
-        console.log("error : ",error);
+        console.log("error : ", error);
         res.status(400).send('Erreur lors de la création de l\'utilisateur');
     }
 }
@@ -47,11 +48,11 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
     console.log("test login");
     try {
-        const { email, password } = req.body;
-        let user = await User.findOne({ email });
+        const {email, password} = req.body;
+        let user = await User.findOne({email});
 
         if (!user) {
-            return res.status(404).send({ "message": 'Utilisateur non trouvé' });
+            return res.status(404).send({"message": 'Utilisateur non trouvé'});
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -62,7 +63,7 @@ const login = async (req, res) => {
         user = user.toObject();
         user['token'] = generateToken(user._id.toString());
 
-        res.status(200).send({ "message": "Connexion réussie", user });
+        res.status(200).send({"message": "Connexion réussie", user});
     } catch (error) {
         console.log("Error:", error);
         res.status(400).send('Erreur lors de la connexion');
