@@ -2,3 +2,4 @@ back/node_modules
 .idea
 .vscode
 front/node_modules
+back/.env
