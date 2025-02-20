@@ -51,13 +51,27 @@ function FormCreation() {
 
     const submit = async (e) => {
         e.preventDefault();
-        console.log("Create form");
-        console.log(form);
-
-        const res = await submitForm(form);
-        console.log("res : ");
-        console.log(res);
+        
+        try {
+            const response = await fetch("http://localhost:3000/form", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(form),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log("Form submitted successfully:", data);
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
     };
+    
 
     useEffect(() => {
         setForm({

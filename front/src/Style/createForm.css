@@ -1,78 +1,41 @@
-/* Style pour chaque question */
-.question-section {
-    margin-bottom: 20px;
+/* Style global pour la mise en page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
 }
 
-.question-title-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* Espacement entre le titre et le sélecteur */
-    margin-bottom: 10px;
+/* Conteneur principal du formulaire */
+.form-creation {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.question-title-input {
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #dadce0;
-    width: 250px;
-    background-color: #f1f3f4;
-    flex: 1;
-}
-
-.question-title-input:focus {
-    border-color: #4285f4;
-    outline: none;
-}
-
-.question-type-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.type-label {
-    font-size: 1rem;
-    color: #202124;
-}
-
-/* Style pour les selecteurs */
-.question-type-select {
-    font-size: 1rem;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #dadce0;
-    background-color: #f1f3f4;
-    width: 180px;
-    /* Espacement entre l'input et le select */
-}
-
-.question-type-select:focus {
-    border-color: #4285f4;
-    outline: none;
-}
-
-
-/* Form title */
+/* En-tête du formulaire */
 .form-header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 .form-header label {
     font-size: 1.2rem;
-    color: #202124;
-    margin-right: 10px;
+    font-weight: bold;
 }
 
 .form-title-input {
     font-size: 1rem;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #dadce0;
-    width: 300px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
     background-color: #f1f3f4;
 }
 
@@ -81,44 +44,89 @@
     outline: none;
 }
 
+/* Style pour chaque question */
+.question-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    border: 1px solid #ddd;
+}
+
+.question-title-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.question-title-input {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color: #fff;
+}
+
+.question-title-input:focus {
+    border-color: #4285f4;
+    outline: none;
+}
+
+/* Style pour les sélecteurs */
+.question-type-select {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 100%;
+}
+
+.question-type-select:focus {
+    border-color: #4285f4;
+    outline: none;
+}
+
 /* Boutons */
 button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #4285f4;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 20px;
+    transition: background 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 button:hover {
     background-color: #357ae8;
 }
 
-/* Additional styling for a cleaner look */
+/* Labels et textarea */
 label {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    display: block;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 textarea {
-    height: 150px;
+    height: 120px;
     resize: vertical;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color: #fff;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-    .FormCreation {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 1rem;
+    .form-creation {
+        padding: 15px;
     }
 }
