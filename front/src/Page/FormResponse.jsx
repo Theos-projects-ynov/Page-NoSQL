@@ -55,27 +55,51 @@ function FormResponse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch("http://localhost:3000/submit-form", {
+        
+        // ID statiques pour l'exemple, remplace-les par les vraies valeurs
+        const responderId = "67b733b2bd3c8f9b9434b8e4"; 
+        const authorFormId = "67b733b2bd3c8f9b9434b8e4";
+        
+        // Transformation des réponses en format demandé
+        const formattedAnswers = Object.entries(answers).map(([index, userAnswer]) => ({
+            id: Number(index),
+            userAnswer,
+            answer: userAnswer, // Remplace ceci par la réponse correcte si besoin
+        }));
+        
+        const payload = {
+            responderId,
+            formId: id,
+            authorFormId,
+            questions: formattedAnswers,
+        };
+        
+        try {           
+            const response = await fetch("http://localhost:3000/answer/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    formId: id,
-                    responses: answers,
-                }),
+                body: JSON.stringify(payload),
             });
-
+            
             if (!response.ok) {
                 throw new Error(`Erreur HTTP : ${response.status}`);
             }
-
-            console.log("Réponses soumises avec succès !");
+            
+            console.log("Réponses envoyées avec succès !");
         } catch (error) {
             console.error("Erreur lors de la soumission :", error);
+            console.log("Données envoyées : ", {
+                responderId,
+                formId: id,
+                authorFormId,
+                questions: formattedAnswers
+            });
         }
     };
+    
+    
 
     if (!form) {
         return <p>Chargement...</p>;
