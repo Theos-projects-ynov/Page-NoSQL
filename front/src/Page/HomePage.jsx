@@ -10,6 +10,8 @@ function HomePage() {
     const [answerForms, setAnswerForms] = useState([]);
     const [decodedToken, setDecodedToken] = useState(null);
 
+    // 67b733b2bd3c8f9b9434b8e4
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -19,7 +21,6 @@ function HomePage() {
                 // Supposons que getMyForms renvoie une promesse
                 getMyForms(decoded.id)
                     .then(res => {
-
                         res.data.reverse();
                         res.data.splice(7);
                         setMyForms(res.data);
