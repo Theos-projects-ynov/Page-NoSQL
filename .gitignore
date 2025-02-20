@@ -2,5 +2,5 @@ back/node_modules
 .idea
 .vscode
 front/node_modules
-back/src/db/db.js
+back/src/db
 back/.env
