@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import QuestionGeneric from "../components/questions/QuestionGeneric";
 import { submitForm } from "../service/formService";
+import { jwtDecode } from "jwt-decode";
 
 function FormCreation() {
     const [question, setQuestion] = React.useState([]);
+    const [decodedToken, setDecodedToken] = React.useState(null);
     const [form, setForm] = React.useState({
         name: "Nom du formulaire",
         title: "Titre", // Titre du formulaire
@@ -11,7 +13,7 @@ function FormCreation() {
         questions: question,
         age: 25,
         email: "test@example.com",
-        authorId: "6780ffdbaae783e48e36d1fd"
+        authorId: 1
     });
 
     // Fonction pour modifier le titre du formulaire
@@ -51,27 +53,22 @@ function FormCreation() {
 
     const submit = async (e) => {
         e.preventDefault();
-        
-        try {
-            const response = await fetch("http://localhost:3000/form", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(form),
-            });
-    
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP : ${response.status}`);
+        console.log("Create form");
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                form.authorId = jwtDecode(token).id;
+                console.log("form.authorId : ", form.authorId);
+            } catch (error) {
+                console.error("Erreur lors du décodage du token JWT :", error);
             }
-    
-            const data = await response.json();
-            console.log("Form submitted successfully:", data);
-        } catch (error) {
-            console.error("Error submitting form:", error);
+        } else {
+            return;
         }
+
+        const res = await submitForm(form);
+        console.log(res);
     };
-    
 
     useEffect(() => {
         setForm({
@@ -99,7 +96,7 @@ function FormCreation() {
             {question.map((q, index) => (
                 <div key={index} className="question-section">
                     <div className="question-title-container">
-                        { }
+                        {}
                         <div className="question-type-container">
                             {/* Si le type est déjà défini, on ne montre pas le label */}
 
