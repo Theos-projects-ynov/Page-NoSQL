@@ -18,51 +18,69 @@ function MainRouter() {
             <Routes>
                 <Route path="/login" element={
                     <>
-                        <Login />
+                        <Login/>
                     </>
-                } />
+                }/>
                 <Route path="/createform" element={
                     <>
-                        <CreateForm />
+                        <UserConnected>
+                            <NavBar/>
+                            <CreateForm/>
+                        </UserConnected>
                     </>
-                } />
+                }/>
                 <Route path="/" element={
                     <UserConnected>
-                        <NavBar />
-                        <HomePage />
+                        <NavBar/>
+                        <HomePage/>
                     </UserConnected>
-                } />
+                }/>
                 <Route path="/profil" element={
                     <>
-                        <Profil />
+                        <UserConnected>
+                            <NavBar/>
+                            <Profil/>
+                        </UserConnected>
                     </>
-                } />
+                }/>
                 <Route path="/form/answer/:id" element={
                     <>
-                        <FormAnswer />
+                        <UserConnected>
+                            <NavBar/>
+                            <FormAnswer/>
+                        </UserConnected>
                     </>
-                } />
+                }/>
                 <Route path="/form/edit/:id" element={
                     <>
-                        <FormEdit />
+                        <UserConnected>
+                            <NavBar/>
+                            <FormEdit/>
+                        </UserConnected>
                     </>
-                } />
+                }/>
                 <Route path="/form/stats/:id" element={
                     <>
-                        <FormStats />
+                        <UserConnected>
+                            <NavBar/>
+                            <FormStats/>
+                        </UserConnected>
                     </>
-                } />
+                }/>
                 <Route path="/register" element={
                     <>
-                        <Register />
+                        <NavBar/>
+                        <Register/>
                     </>
-                } />
+                }/>
                 <Route path="/form/:id" element={
                     <>
-                        <FormResponse />
+                        <UserConnected>
+                            <NavBar/>
+                            <FormResponse/>
+                        </UserConnected>
                     </>
-                } />
-
+                }/>
             </Routes>
         </BrowserRouter>
     )
