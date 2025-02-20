@@ -77,6 +77,18 @@ const getOneAnswerByResponderId = async (req, res) => {
     }
 }
 
+const getOneAnswerByFormId = async (req, res) => {
+    console.log("getOneAnswerByResponderId");
+    try {
+        console.log("getOneAnswerByResponderId : ", req.params);
+        const id = req.params.id;
+        const answer = await Answer.findOne({formId: id}, {}, {});
+        res.status(200).json(answer);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 const _isUserExist = async (idUser) => {
     console.log("fonction");
     console.log("idUser : ", idUser);
@@ -118,5 +130,6 @@ export {
     getAllAnswer,
     getOneAnswerById,
     getOneAnswerByAuthorId,
+    getOneAnswerByFormId,
     getOneAnswerByResponderId
 };

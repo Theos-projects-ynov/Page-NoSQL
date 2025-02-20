@@ -18,6 +18,11 @@ app.use(cors({
     credentials: true
 }));
 
+app.get('/', (req, res) => {
+    console.log("test OK");
+    res.send("test OK");
+})
+
 app.use('/user', userRoutes);  // Utilisation de la route /user
 app.use('/form', formRoutes);
 app.use('/answer', answerRoutes);

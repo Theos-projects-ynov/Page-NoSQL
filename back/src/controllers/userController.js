@@ -32,7 +32,6 @@ const createUser = async (req, res) => {
         password = bcrypt.hashSync(password, 10);
 
         let newUser = new User({name, password, email, age});
-        // newUser = newUser.toObject();
 
         await newUser.save();
 
