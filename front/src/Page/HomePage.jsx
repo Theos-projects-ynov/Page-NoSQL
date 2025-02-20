@@ -19,6 +19,9 @@ function HomePage() {
                 // Supposons que getMyForms renvoie une promesse
                 getMyForms(decoded.id)
                     .then(res => {
+
+                        res.data.reverse();
+                        res.data.splice(7);
                         setMyForms(res.data);
                         setIsLoading(false);
                     }).catch(error => {
