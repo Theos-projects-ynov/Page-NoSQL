@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import QuestionGeneric from "../components/questions/QuestionGeneric";
 import { submitForm } from "../service/formService";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";  // Importation du hook useNavigate
 
 function FormCreation() {
     const [question, setQuestion] = React.useState([]);
     const [decodedToken, setDecodedToken] = React.useState(null);
     const [form, setForm] = React.useState({
         name: "Nom du formulaire",
-        title: "Titre", // Titre du formulaire
+        title: "Titre", 
         description: "LA GROS DESCRIPTION",
         questions: question,
         age: 25,
@@ -16,7 +17,8 @@ function FormCreation() {
         authorId: 1
     });
 
-    // Fonction pour modifier le titre du formulaire
+    const navigate = useNavigate();  // Déclare le hook navigate pour la redirection
+
     const handleTitleChange = (e) => {
         setForm({
             ...form,
@@ -24,18 +26,16 @@ function FormCreation() {
         });
     };
 
-    // Fonction pour modifier le titre d'une question
     const handleQuestionTitleChange = (index, e) => {
         const updatedQuestions = [...question];
-        updatedQuestions[index].title = e.target.value;  // Modifie le titre de la question spécifique
-        setQuestion(updatedQuestions);  // Met à jour les questions
+        updatedQuestions[index].title = e.target.value;
+        setQuestion(updatedQuestions);
     };
 
-    // Fonction pour modifier le type de la question
     const handleQuestionTypeChange = (index, e) => {
         const updatedQuestions = [...question];
-        updatedQuestions[index].type = e.target.value; // Modifie le type de la question
-        setQuestion(updatedQuestions); // Met à jour les questions
+        updatedQuestions[index].type = e.target.value;
+        setQuestion(updatedQuestions);
     };
 
     const handleAddQuestion = (e) => {
@@ -43,8 +43,8 @@ function FormCreation() {
         setQuestion([
             ...question,
             {
-                type: "short",  // Type par défaut
-                title: "Nouvelle question",  // Valeur par défaut
+                type: "short",  
+                title: "Nouvelle question",  
                 description: "Description",
                 required: false
             }
@@ -66,8 +66,15 @@ function FormCreation() {
             return;
         }
 
-        const res = await submitForm(form);
-        console.log(res);
+        try {
+            const res = await submitForm(form);
+            console.log(res);
+
+            // Redirige l'utilisateur vers la page principale après la soumission réussie
+            navigate("/");  // Redirection vers la page principale (ou la page que tu souhaites)
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire :", error);
+        }
     };
 
     useEffect(() => {
@@ -94,12 +101,6 @@ function FormCreation() {
             {question.map((q, index) => (
                 <div key={index} className="question-section">
                     <div className="question-title-container">
-                        { }
-                        <div className="question-type-container">
-                            {/* Si le type est déjà défini, on ne montre pas le label */}
-
-                        </div>
-
                     </div>
                     <QuestionGeneric
                         index={index}

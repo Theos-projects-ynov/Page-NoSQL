@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../Style/formResponse.css";
 
 function FormResponse() {
     const { id } = useParams();
+    const navigate = useNavigate(); // Hook pour la redirection
     const [form, setForm] = useState(null);
     const [answers, setAnswers] = useState({});
 
@@ -13,14 +14,11 @@ function FormResponse() {
             .then((data) => {
                 setForm(data);
 
-                // Initialiser les réponses
                 const initialAnswers = {};
                 data.questions.forEach((question, index) => {
                     if (question.type === "checkbox_question") {
-                        // Pour les checkboxes, on stocke les valeurs sélectionnées sous forme de tableau
                         initialAnswers[index] = [];
                     } else {
-                        // Pour les autres, on stocke une seule valeur
                         initialAnswers[index] = "";
                     }
                 });
@@ -42,12 +40,12 @@ function FormResponse() {
             if (currentAnswers.includes(option)) {
                 return {
                     ...prevAnswers,
-                    [index]: currentAnswers.filter((item) => item !== option), // Retire l'option si déjà cochée
+                    [index]: currentAnswers.filter((item) => item !== option),
                 };
             } else {
                 return {
                     ...prevAnswers,
-                    [index]: [...currentAnswers, option], // Ajoute l'option cochée
+                    [index]: [...currentAnswers, option],
                 };
             }
         });
@@ -55,16 +53,14 @@ function FormResponse() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // ID statiques pour l'exemple, remplace-les par les vraies valeurs
+
         const responderId = "67b733b2bd3c8f9b9434b8e4"; 
         const authorFormId = "67b733b2bd3c8f9b9434b8e4";
         
-        // Transformation des réponses en format demandé
         const formattedAnswers = Object.entries(answers).map(([index, userAnswer]) => ({
             id: Number(index),
             userAnswer,
-            answer: userAnswer, // Remplace ceci par la réponse correcte si besoin
+            answer: userAnswer,
         }));
         
         const payload = {
@@ -73,8 +69,8 @@ function FormResponse() {
             authorFormId,
             questions: formattedAnswers,
         };
-        
-        try {           
+
+        try {
             const response = await fetch("http://localhost:3000/answer/", {
                 method: "POST",
                 headers: {
@@ -82,12 +78,16 @@ function FormResponse() {
                 },
                 body: JSON.stringify(payload),
             });
-            
+
             if (!response.ok) {
                 throw new Error(`Erreur HTTP : ${response.status}`);
             }
-            
+
             console.log("Réponses envoyées avec succès !");
+            
+            // Redirection vers la page principale après soumission réussie
+            navigate("/");
+
         } catch (error) {
             console.error("Erreur lors de la soumission :", error);
             console.log("Données envoyées : ", {
@@ -98,8 +98,6 @@ function FormResponse() {
             });
         }
     };
-    
-    
 
     if (!form) {
         return <p>Chargement...</p>;
@@ -110,12 +108,12 @@ function FormResponse() {
             <img src={form.banner} alt="Bannière" className="form-response-banner" />
             <h1>{form.title}</h1>
             <p>{form.description}</p>
-    
+
             <form onSubmit={handleSubmit}>
                 {form.questions.map((question, index) => (
                     <div key={index} className="question-block">
                         <label>{question.title}</label>
-    
+
                         {question.type === "short_question" ? (
                             <input
                                 type="text"
@@ -163,12 +161,11 @@ function FormResponse() {
                         )}
                     </div>
                 ))}
-    
+
                 <button type="submit">Envoyer</button>
             </form>
         </div>
     );
-    
 }
 
 export default FormResponse;
