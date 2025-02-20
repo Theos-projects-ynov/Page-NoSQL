@@ -1,55 +1,106 @@
-.form-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-banner {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-h1 {
-    text-align: center;
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
     color: #333;
 }
 
-p {
-    text-align: center;
-    color: #555;
+/* Conteneur principal (spécifique à la page des réponses) */
+.form-response-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.question-block {
+/* Bannière */
+.form-response-banner {
+    width: 100%;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.question-block label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+/* Titre et description */
+.form-response-container h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+.form-response-container p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Style des questions */
+.form-response-container .question-block {
+    margin-bottom: 20px;
+    padding: 15px;
     border-radius: 6px;
+    background-color: #f9fafb;
+    border: 1px solid #ddd;
 }
 
-textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-button {
+/* Label des questions */
+.form-response-container .question-block label {
+    font-size: 1.1rem;
+    font-weight: bold;
     display: block;
-    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Input et Textarea */
+.form-response-container input[type="text"],
+.form-response-container textarea {
+    font-size: 1rem;
     padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 95%;
+    background-color: #fff;
+}
+
+.form-response-container input[type="text"]:focus,
+.form-response-container textarea:focus {
+    border-color: #4285f4;
+    outline: none;
+}
+
+/* ---- Aligner les options radio & checkbox à droite, cases collées ---- */
+
+/* Conteneur des options radio et checkbox */
+.form-response-container .question-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex; /* Alignement à droite */
+    gap: 6px;
+    text-align: right;
+}
+
+/* Style des boutons radio et checkbox */
+.form-response-container .question-options label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alignement à droite */
+    gap: 6px; /* Réduction de l’espace entre la case et le texte */
+    cursor: pointer;
+    width: fit-content;
+}
+
+/* Cases collées au texte */
+.form-response-container .question-options input[type="radio"],
+.form-response-container .question-options input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+/* Bouton de soumission */
+.form-response-container button {
+    padding: 12px 20px;
     background-color: #4285f4;
     color: white;
     border: none;
@@ -57,8 +108,19 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
 }
 
-button:hover {
+.form-response-container button:hover {
     background-color: #357ae8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-response-container {
+        padding: 15px;
+    }
 }

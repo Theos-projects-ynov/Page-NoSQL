@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../Style/formResponse.css";
 
 function FormResponse() {
     const { id } = useParams();
@@ -11,9 +12,17 @@ function FormResponse() {
             .then((response) => response.json())
             .then((data) => {
                 setForm(data);
+
+                // Initialiser les réponses
                 const initialAnswers = {};
                 data.questions.forEach((question, index) => {
-                    initialAnswers[index] = "";
+                    if (question.type === "checkbox_question") {
+                        // Pour les checkboxes, on stocke les valeurs sélectionnées sous forme de tableau
+                        initialAnswers[index] = [];
+                    } else {
+                        // Pour les autres, on stocke une seule valeur
+                        initialAnswers[index] = "";
+                    }
                 });
                 setAnswers(initialAnswers);
             })
@@ -25,6 +34,23 @@ function FormResponse() {
             ...prevAnswers,
             [index]: value,
         }));
+    };
+
+    const handleCheckboxChange = (index, option) => {
+        setAnswers((prevAnswers) => {
+            const currentAnswers = prevAnswers[index] || [];
+            if (currentAnswers.includes(option)) {
+                return {
+                    ...prevAnswers,
+                    [index]: currentAnswers.filter((item) => item !== option), // Retire l'option si déjà cochée
+                };
+            } else {
+                return {
+                    ...prevAnswers,
+                    [index]: [...currentAnswers, option], // Ajoute l'option cochée
+                };
+            }
+        });
     };
 
     const handleSubmit = async (e) => {
@@ -56,61 +82,69 @@ function FormResponse() {
     }
 
     return (
-        <div className="form-container">
-            <img src={form.banner} alt="Bannière" className="form-banner" />
+        <div className="form-response-container">
+            <img src={form.banner} alt="Bannière" className="form-response-banner" />
             <h1>{form.title}</h1>
             <p>{form.description}</p>
-
+    
             <form onSubmit={handleSubmit}>
-                {form.questions.map((question, index) => {
-                    if (!question.type) {
-                        return <p key={index} style={{ color: "red" }}>⚠ Question sans type ignorée</p>;
-                    }
-
-                    return (
-                        <div key={index} className="question-block">
-                            <label>{question.title}</label>
-
-                            {question.type === "short_question" ? (
-                                <input
-                                    type="text"
-                                    value={answers[index] || ""}
-                                    onChange={(e) => handleAnswerChange(index, e.target.value)}
-                                    placeholder="Votre réponse..."
-                                />
-                            ) : question.type === "long_question" ? (
-                                <textarea
-                                    value={answers[index] || ""}
-                                    onChange={(e) => handleAnswerChange(index, e.target.value)}
-                                    placeholder="Votre réponse..."
-                                />
-                            ) : question.type === "radio_question" && question.options ? (
-                                <div>
-                                    {Object.entries(question.options).map(([key, value]) => (
-                                        <label key={key}>
-                                            <input
-                                                type="radio"
-                                                name={`question-${index}`}
-                                                value={value}
-                                                checked={answers[index] === value}
-                                                onChange={(e) => handleAnswerChange(index, e.target.value)}
-                                            />
-                                            {value}
-                                        </label>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p style={{ color: "red" }}>⚠ Type de question non pris en charge : {question.type}</p>
-                            )}
-                        </div>
-                    );
-                })}
-
+                {form.questions.map((question, index) => (
+                    <div key={index} className="question-block">
+                        <label>{question.title}</label>
+    
+                        {question.type === "short_question" ? (
+                            <input
+                                type="text"
+                                value={answers[index] || ""}
+                                onChange={(e) => handleAnswerChange(index, e.target.value)}
+                                placeholder="Votre réponse..."
+                            />
+                        ) : question.type === "long_question" ? (
+                            <textarea
+                                value={answers[index] || ""}
+                                onChange={(e) => handleAnswerChange(index, e.target.value)}
+                                placeholder="Votre réponse..."
+                            />
+                        ) : question.type === "radio_question" ? (
+                            <div className="question-options">
+                                {Object.keys(question.options).map((option) => (
+                                    <label key={option}>
+                                        <input
+                                            type="radio"
+                                            name={`radio-${index}`}
+                                            value={option}
+                                            checked={answers[index] === option}
+                                            onChange={() => handleAnswerChange(index, option)}
+                                        />
+                                        {option}
+                                    </label>
+                                ))}
+                            </div>
+                        ) : question.type === "checkbox_question" ? (
+                            <div className="question-options">
+                                {Object.keys(question.options).map((option) => (
+                                    <label key={option}>
+                                        <input
+                                            type="checkbox"
+                                            value={option}
+                                            checked={answers[index]?.includes(option)}
+                                            onChange={() => handleCheckboxChange(index, option)}
+                                        />
+                                        {option}
+                                    </label>
+                                ))}
+                            </div>
+                        ) : (
+                            <p>Type de question non pris en charge</p>
+                        )}
+                    </div>
+                ))}
+    
                 <button type="submit">Envoyer</button>
             </form>
         </div>
     );
+    
 }
-
 
 export default FormResponse;
