@@ -10,6 +10,7 @@ import FormStats from "../Page/FormStats";
 import NavBar from "../components/header/NavBar";
 import UserConnected from "../components/auth/UserConnected";
 import Register from "../Page/Register";
+import FormResponse from "../Page/FormResponse";
 
 function MainRouter() {
     return (
@@ -54,6 +55,11 @@ function MainRouter() {
                 <Route path="/register" element={
                     <>
                         <Register />
+                    </>
+                } />
+                <Route path="/form/:id" element={
+                    <>
+                        <FormResponse />
                     </>
                 } />
 

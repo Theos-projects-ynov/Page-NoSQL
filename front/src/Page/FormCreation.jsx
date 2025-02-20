@@ -91,12 +91,10 @@ function FormCreation() {
                 />
             </div>
 
-            <button onClick={handleAddQuestion}>Add Question</button>
-
             {question.map((q, index) => (
                 <div key={index} className="question-section">
                     <div className="question-title-container">
-                        {}
+                        { }
                         <div className="question-type-container">
                             {/* Si le type est déjà défini, on ne montre pas le label */}
 
@@ -110,6 +108,8 @@ function FormCreation() {
                     />
                 </div>
             ))}
+
+            <button onClick={handleAddQuestion}>Add Question</button>
 
             <button onClick={submit}>Submit</button>
         </div>
