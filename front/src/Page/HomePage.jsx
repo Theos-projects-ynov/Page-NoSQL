@@ -3,6 +3,7 @@ import FormCard from "../components/forms/FormCard";
 import "../Style/page/homePage.sass";
 import { getMyForms } from "../service/formService";
 import { jwtDecode } from 'jwt-decode';
+import { getMyAnswer } from "../service/answerService";
 
 function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
@@ -21,9 +22,24 @@ function HomePage() {
                 // Supposons que getMyForms renvoie une promesse
                 getMyForms(decoded.id)
                     .then(res => {
-                        res.data.reverse();
-                        res.data.splice(7);
-                        setMyForms(res.data);
+                        const resforms = res.data;
+                        resforms.reverse();
+                        resforms.splice(7);
+                        setMyForms(resforms);
+                        console.log("forms : ", resforms);
+
+                    }).catch(error => {
+                    console.error("Erreur lors de la récupération des formulaires :", error);
+                    setIsLoading(false);
+                });
+                console.log("resd")
+                getMyAnswer(decoded.id)
+                    .then(res => {
+                        const resAnswer = res.data;
+                        resAnswer.reverse();
+                        resAnswer.splice(7);
+                        setAnswerForms(resAnswer);
+                        console.log("answerForms : ", resAnswer);
                         setIsLoading(false);
                     }).catch(error => {
                     console.error("Erreur lors de la récupération des formulaires :", error);
@@ -77,10 +93,10 @@ function HomePage() {
                     {isLoading ? (
                         <p>Loading...</p>
                     ) : (
-                        myForms.length === 0 ? (
+                        answerForms.length === 0 ? (
                             <p>No form found</p>
                         ) : (
-                            myForms.map((form, index) => (
+                            answerForms.map((form, index) => (
                                 <FormCard
                                     key={form.id + "-" + index}
                                     name={form.title}
