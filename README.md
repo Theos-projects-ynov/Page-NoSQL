@@ -9,7 +9,108 @@ Il est composé de deux parties : une partie front et une partie back.
 
 ## Front
 
-## Back
+### Technologie
+
+- React
+- React-Router
+- CSS / SASS
+- Authentification : Basée sur des tokens JWT
+- Communication avec le Backend : API REST
+
+### Installation
+
+Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start`
+
+### Structure du projet
+
+L’application est organisée autour de plusieurs dossiers clés :
+
+#### Pages
+
+Contient les différents fichiers de page (dans le dossier Page), par exemple :
+
+* Login.jsx – Page de connexion.
+* Register.jsx – Page d'inscription.
+* HomePage.jsx – Page d'accueil qui affiche plusieurs catégories de formulaires.
+* Profil.jsx – Page de profil utilisateur avec la liste des formulaires créés.
+* MyFormsPage.jsx – Liste des formulaires créés par l’utilisateur.
+* CreateForm.jsx & FormCreation.jsx – Interface de création de formulaire.
+* FormResponse.jsx – Interface pour répondre à un formulaire.
+* FormStats.jsx – Page pour visualiser les statistiques et les réponses.
+* FormAnswer.jsx et FormEdit.jsx – Prévisions pour la consultation/modification
+  d’un formulaire (actuellement minimalistes).
+
+### Routage
+
+Le routage est défini dans le fichier MainRouter.jsx à l’aide de React Router.
+Voici un aperçu des routes principales :
+
+/login
+Affiche la page de connexion avec le composant Login et la barre de navigation (
+NavBar).
+
+/register
+Affiche la page d'inscription via le composant Register avec NavBar.
+
+/
+Page d'accueil (HomePage) affichant :
+
+Mes formulaires (formulaires créés par l’utilisateur)
+Mes réponses (formulaires auxquels l’utilisateur a répondu)
+Tous les formulaires
+Accès protégé par le wrapper UserConnected.
+
+* /profil  
+  Affiche la page de profil (Profil) contenant la liste des formulaires de
+  l’utilisateur. Accès protégé.
+
+* /createform  
+  Accès à la page de création de formulaire (CreateForm et FormCreation)
+  protégée par UserConnected.
+
+* /myformpage  
+  Liste des formulaires de l’utilisateur via MyFormsPage. Accès protégé.
+
+* /form/answer/:id  
+  Page de réponse à un formulaire spécifique (FormAnswer). Accès protégé.
+
+* /form/edit/:id  
+  Page de modification d’un formulaire (FormEdit). Accès protégé.
+
+* /form/stats/:id  
+  Affiche les statistiques et les réponses d’un formulaire (FormStats). Accès
+  protégé.
+
+* /form/:id  
+  Page permettant de répondre à un formulaire particulier (FormResponse). Accès
+  protégé.
+
+Chaque route intégrant NavBar et, pour la plupart, le composant **UserConnected
+**
+garantit que seules les actions autorisées (pour les utilisateurs connectés)
+sont accessibles.
+
+### Services :
+
+Les appels API sont centralisés dans des fichiers de service :
+
+* formService – Fonctions comme getMyForms, getAllForms et submitForm pour gérer
+  les formulaires.
+* answerService – Fonction getMyAnswer pour récupérer les réponses aux
+  formulaires.
+* userService – Gestion de l’authentification, par exemple avec la fonction
+  login.
+
+### Authentification et Sécurisation
+
+Stockage du Token : Après connexion, le token JWT est sauvegardé dans le
+localStorage.
+Décodage du Token : Utilisation de jwtDecode pour extraire l’ID et autres
+informations de l’utilisateur.
+Protection des Routes : Le composant UserConnected enveloppe la plupart des
+pages pour vérifier que l’utilisateur est authentifié.
+
+## Partie Back
 
 ### Technologie
 
@@ -31,7 +132,6 @@ Il est composé de deux parties : une partie front et une partie back.
     mais aussi du coté front dans le fichier `package.json` du dossier front
 </details>
 
-## Partie Back
 
 La partie Back est développée avec Node.js, Express et MongoDB (via
 Mongoose).  
@@ -282,9 +382,12 @@ dans quel format envoyer.
 
 ## Conclusion
 
-Conclusion
-Cette documentation décrit la structure et les endpoints de l'API back-end. Elle
-a permis de tester et d'intégrer les différentes fonctionnalités (gestion des
-utilisateurs, des formulaires et des réponses).  
+Le projet Form Piece offre une solution complète pour la création, la
+modification, la suppression et le remplissage de formulaires en ligne.  
+Organisé en deux parties distinctes — un front-end développé en React et un
+back-end en Node.js avec Express et MongoDB — le système garantit une expérience
+utilisateur fluide et sécurisée grâce à l'utilisation de JWT pour l'
+authentification et d'une architecture API REST bien structurée.
+
 
 
