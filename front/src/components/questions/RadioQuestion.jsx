@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function RadioQuestion({ index, question, setQuestion }) {
+function RadioQuestion({ index, question }) {
     // Initialisation du titre et des options directement à partir de l'objet question
     const [title, setTitle] = useState(question?.title || "");
     const [radioOptions, setRadioOptions] = useState(question?.options || {});
@@ -15,11 +15,11 @@ function RadioQuestion({ index, question, setQuestion }) {
         // Met à jour l'objet question avec les nouvelles options
         const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions; // Retourne la nouvelle liste des questions
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions; // Retourne la nouvelle liste des questions
+        // });
 
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
         setInputText('');              // Réinitialise le champ de texte
@@ -32,11 +32,11 @@ function RadioQuestion({ index, question, setQuestion }) {
         // Mise à jour du titre dans l'objet question
         const updatedQuestion = { ...question, title: newTitle };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
     };
 
     // Fonction pour gérer la sélection d'une option radio
@@ -51,11 +51,11 @@ function RadioQuestion({ index, question, setQuestion }) {
         // Met à jour l'objet question avec les nouvelles options
         const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
 
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
     };
@@ -70,11 +70,11 @@ function RadioQuestion({ index, question, setQuestion }) {
         // Met à jour l'objet question avec les options réinitialisées
         const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
 
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
     };

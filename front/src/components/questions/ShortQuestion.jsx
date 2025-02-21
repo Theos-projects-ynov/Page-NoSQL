@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function ShortQuestion({ index, question, setQuestion }) {
+function ShortQuestion({ index, question }) {
     const [title, setTitle] = React.useState(question?.title || '');
 
     useEffect(() => {
@@ -13,11 +13,11 @@ function ShortQuestion({ index, question, setQuestion }) {
         if (question) {
             question.title = e.target.value; // Mise à jour de la question
             console.log("Titre mis à jour : ", title);
-            setQuestion(prevQuestions => {
-                const newQuestions = [...prevQuestions];
-                newQuestions[index] = question; // Met à jour la question avec le nouvel 'title'
-                return newQuestions;
-            });
+            // setQuestion(prevQuestions => {
+            //     const newQuestions = [...prevQuestions];
+            //     newQuestions[index] = question; // Met à jour la question avec le nouvel 'title'
+            //     return newQuestions;
+            // });
         } else {
             console.error("La question est undefined à l'index", index);
         }

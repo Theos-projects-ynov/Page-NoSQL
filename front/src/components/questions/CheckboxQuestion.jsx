@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CheckboxQuestion({ index, question, setQuestion }) {
+function CheckboxQuestion({ index, question }) {
     const [title, setTitle] = useState(question?.title || "");
     const [checkboxes, setCheckboxes] = useState(question?.options || {});
     const [inputText, setInputText] = useState('');
@@ -14,11 +14,11 @@ function CheckboxQuestion({ index, question, setQuestion }) {
         // Mise à jour de l'objet question avec les nouvelles options
         const updatedQuestion = { ...question, options: newCheckboxes };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
 
         setInputText(''); // Réinitialise le champ de texte
     };
@@ -31,11 +31,11 @@ function CheckboxQuestion({ index, question, setQuestion }) {
         // Mise à jour de l'objet question avec les nouvelles options
         const updatedQuestion = { ...question, options: newCheckboxes };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
     };
 
     // Mise à jour du titre et de l'objet question
@@ -45,11 +45,11 @@ function CheckboxQuestion({ index, question, setQuestion }) {
 
         const updatedQuestion = { ...question, title: newTitle };
 
-        setQuestion(prevQuestions => {
-            const updatedQuestions = [...prevQuestions];
-            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-            return updatedQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const updatedQuestions = [...prevQuestions];
+        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+        //     return updatedQuestions;
+        // });
     };
 
     return (

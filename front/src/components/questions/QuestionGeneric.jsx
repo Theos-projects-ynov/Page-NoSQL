@@ -4,7 +4,7 @@ import LongQuestion from "./LongQuestion";
 import RadioQuestion from "./RadioQuestion";
 import CheckboxQuestion from "./CheckboxQuestion";
 
-function QuestionGeneric({ index, question, setQuestion }) {
+function QuestionGeneric({ index, question }) {
     // Initialiser l'état en premier (évite les erreurs ESLint)
     const [selectedOption, setSelectedOption] = useState(question?.type || '');
 
@@ -23,11 +23,11 @@ function QuestionGeneric({ index, question, setQuestion }) {
         setSelectedOption(newType);
 
         // Mise à jour correcte de la question
-        setQuestion(prevQuestions => {
-            const newQuestions = [...prevQuestions];
-            newQuestions[index] = { ...newQuestions[index], type: newType };
-            return newQuestions;
-        });
+        // setQuestion(prevQuestions => {
+        //     const newQuestions = [...prevQuestions];
+        //     newQuestions[index] = { ...newQuestions[index], type: newType };
+        //     return newQuestions;
+        // });
     };
 
     return (
@@ -52,10 +52,10 @@ function QuestionGeneric({ index, question, setQuestion }) {
             <p>🛠️ Type actuel : {selectedOption}</p>
 
             {/* Affichage sécurisé : ne rend l'élément que si question est bien définie */}
-            {selectedOption === "short_question" && question && <ShortQuestion index={index} question={question} setQuestion={setQuestion} />}
-            {selectedOption === "long_question" && question && <LongQuestion index={index} question={question} setQuestion={setQuestion} />}
-            {selectedOption === "radio_question" && question && <RadioQuestion index={index} question={question} setQuestion={setQuestion} />}
-            {selectedOption === "checkbox_question" && question && <CheckboxQuestion index={index} question={question} setQuestion={setQuestion} />}
+            {selectedOption === "short_question" && question && <ShortQuestion index={index} question={question} />}
+            {selectedOption === "long_question" && question && <LongQuestion index={index} question={question} />}
+            {selectedOption === "radio_question" && question && <RadioQuestion index={index} question={question} />}
+            {selectedOption === "checkbox_question" && question && <CheckboxQuestion index={index} question={question} />}
         </div>
     );
 }
