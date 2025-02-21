@@ -90,7 +90,7 @@ function FormCreation({ initialForm }) {
     };
 
     return (
-        <div>
+        <div className="form-creation">
             <h1>{initialForm ? "Modifier le formulaire" : "Créer un formulaire"}</h1>
             <input
                 type="text"

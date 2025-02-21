@@ -23,7 +23,6 @@ function CreateForm() {
     return (
         <>
             <h1>{id ? "Edit Form" : "Create Form"}</h1>
-            <p>{id ? "Modify an existing form" : "Create a new form"}</p>
 
             {id && !formData ? (
                 <p>Loading...</p>
