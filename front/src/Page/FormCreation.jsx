@@ -48,6 +48,14 @@ function FormCreation({ initialForm }) {
         });
     };
 
+    const handleRemoveQuestion = (index) => {
+        setForm(prevForm => {
+            const updatedQuestions = prevForm.questions.filter((_, idx) => idx !== index);
+            console.log("Suppression de la question à l'index", index);
+            return { ...prevForm, questions: updatedQuestions };
+        });
+    };
+
     const handleQuestionChange = (index, updatedQuestion) => {
         setForm(prevForm => {
             if (!prevForm.questions || !prevForm.questions[index]) {
@@ -100,12 +108,20 @@ function FormCreation({ initialForm }) {
             />
             {form.questions.length > 0 ? (
                 form.questions.map((q, index) => (
-                    <QuestionGeneric
-                        key={index}
-                        index={index}
-                        question={q}
-                        onChange={(updatedQuestion) => handleQuestionChange(index, updatedQuestion)}
-                    />
+                    <div key={index} className="question-item">
+                        <QuestionGeneric
+                            index={index}
+                            question={q}
+                            onChange={(updatedQuestion) => handleQuestionChange(index, updatedQuestion)}
+                        />
+                        <button 
+    onClick={() => handleRemoveQuestion(index)} 
+    style={{ backgroundColor: 'red', color: 'white', border: 'none', padding: '8px 16px', cursor: 'pointer' }}
+>
+    Supprimer la question
+</button>
+
+                    </div>
                 ))
             ) : (
                 <p>Aucune question pour le moment.</p>

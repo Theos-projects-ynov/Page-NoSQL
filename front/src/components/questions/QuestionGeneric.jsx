@@ -49,7 +49,7 @@ function QuestionGeneric({ index, question }) {
             </select>
 
             {/* Debug affichage */}
-            <p>🛠️ Type actuel : {selectedOption}</p>
+            {/* <p>🛠️ Type actuel : {selectedOption}</p> */}
 
             {/* Affichage sécurisé : ne rend l'élément que si question est bien définie */}
             {selectedOption === "short_question" && question && <ShortQuestion index={index} question={question} />}

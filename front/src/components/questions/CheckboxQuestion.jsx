@@ -10,57 +10,31 @@ function CheckboxQuestion({ index, question }) {
         if (inputText.trim() === '') return; // Empêche d'ajouter une case avec un texte vide
         const newCheckboxes = { ...checkboxes, [inputText]: false };
         setCheckboxes(newCheckboxes);
-
-        // Mise à jour de l'objet question avec les nouvelles options
-        const updatedQuestion = { ...question, options: newCheckboxes };
-
-        // setQuestion(prevQuestions => {
-        //     const updatedQuestions = [...prevQuestions];
-        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-        //     return updatedQuestions;
-        // });
-
         setInputText(''); // Réinitialise le champ de texte
+    };
+
+    // Fonction pour supprimer une case à cocher
+    const removeCheckbox = (label) => {
+        const newCheckboxes = { ...checkboxes };
+        delete newCheckboxes[label]; // Supprime l'option par son label
+        setCheckboxes(newCheckboxes);
     };
 
     // Fonction pour mettre à jour l'état d'une case à cocher spécifique
     const handleCheckboxChange = (label) => {
         const newCheckboxes = { ...checkboxes, [label]: !checkboxes[label] };
         setCheckboxes(newCheckboxes);
-
-        // Mise à jour de l'objet question avec les nouvelles options
-        const updatedQuestion = { ...question, options: newCheckboxes };
-
-        // setQuestion(prevQuestions => {
-        //     const updatedQuestions = [...prevQuestions];
-        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-        //     return updatedQuestions;
-        // });
     };
 
-    // Mise à jour du titre et de l'objet question
+    // Mise à jour du titre
     const handleChangeTitle = (e) => {
         const newTitle = e.target.value;
         setTitle(newTitle);
-
-        const updatedQuestion = { ...question, title: newTitle };
-
-        // setQuestion(prevQuestions => {
-        //     const updatedQuestions = [...prevQuestions];
-        //     updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
-        //     return updatedQuestions;
-        // });
     };
 
     return (
         <div>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                marginBottom: '10px',
-                marginTop: '10px'
-            }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', marginTop: '10px' }}>
                 <p style={{ margin: 0 }}>Title :</p>
                 <input
                     type="text"
@@ -79,12 +53,7 @@ function CheckboxQuestion({ index, question }) {
 
             <div>
                 {Object.keys(checkboxes).map((label) => (
-                    <label key={label} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '10px',
-                        marginBottom: '8px'
-                    }}>
+                    <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                         <input
                             type="checkbox"
                             checked={checkboxes[label]}
@@ -92,7 +61,8 @@ function CheckboxQuestion({ index, question }) {
                             style={{ width: 'auto', height: 'auto' }}
                         />
                         <span>{label}</span>
-                    </label>
+                        <button onClick={() => removeCheckbox(label)} style={{ marginLeft: '10px' , background: 'red'}}>Supprimer l'option</button>
+                    </div>
                 ))}
             </div>
         </div>
