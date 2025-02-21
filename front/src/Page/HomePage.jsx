@@ -30,9 +30,9 @@ function HomePage() {
                         console.log("answerForms : ", resAnswers);
                         setIsLoading(false);
                     }).catch(error => {
-                        console.log("Erreur lors de la récupération des formulaires :", error);
-                        setIsLoading(false);
-                    });
+                    console.log("Erreur lors de la récupération des formulaires :", error);
+                    setIsLoading(false);
+                });
 
                 getMyForms(decoded.id)
                     .then(res => {
@@ -43,9 +43,9 @@ function HomePage() {
                         console.log("forms : ", resForms);
 
                     }).catch(error => {
-                        console.log("Erreur lors de la récupération des answer :", error);
-                        setIsLoading(false);
-                    });
+                    console.log("Erreur lors de la récupération des answer :", error);
+                    setIsLoading(false);
+                });
 
                 getAllForms(decoded.id)
                     .then(res => {
@@ -55,9 +55,9 @@ function HomePage() {
                         console.log("forms : ", resAllForms);
 
                     }).catch(error => {
-                        console.log("Erreur lors de la récupération des answer :", error);
-                        setIsLoading(false);
-                    });
+                    console.log("Erreur lors de la récupération des answer :", error);
+                    setIsLoading(false);
+                });
 
 
             } catch (error) {
@@ -69,9 +69,14 @@ function HomePage() {
         }
     }, []);
 
-    const handleCardClick = async (form) => {
+    const handleCardClickMyForm = async (form) => {
         console.log("Formulaire cliqué :", form, ", decodedToken :", decodedToken);
         window.location.href = `/createform/${form._id}`; // Redirige vers createform/id
+    };
+
+    const handleCardClickAllForms = async (form) => {
+        console.log("Formulaire cliqué :", form, ", decodedToken :", decodedToken);
+        window.location.href = `/form/${form._id}`; // Redirige vers createform/id
     };
 
 
@@ -95,12 +100,12 @@ function HomePage() {
                                     key={form.id + "-" + index}
                                     name={form.title}
                                     banner={form.banner}
-                                    onClick={() => handleCardClick(form)}
+                                    onClick={() => handleCardClickMyForm(form)}
                                 />
                             ))
                         )
                     )}
-                    <FormCard isEmpty onClick={handleAddForm} />
+                    <FormCard isEmpty onClick={handleAddForm}/>
                 </div>
             </div>
             <div className="homepage-container">
@@ -117,7 +122,6 @@ function HomePage() {
                                     key={form.id + "-" + index}
                                     name={form.title}
                                     banner={form.banner}
-                                    onClick={() => handleCardClick(form)}
                                 />
                             ))
                         )
@@ -138,7 +142,7 @@ function HomePage() {
                                     key={form.id + "-" + index}
                                     name={form.title}
                                     banner={form.banner}
-                                    onClick={() => handleCardClick(form)}
+                                    onClick={() => handleCardClickAllForms(form)}
                                 />
                             ))
                         )
