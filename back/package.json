@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "onepiece": "node easteregg/onepiece.js && nodemon index.js",
-    "start": "nodemon index.js",
+    "start": "PORT=3001 react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,

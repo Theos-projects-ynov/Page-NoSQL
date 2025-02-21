@@ -11,14 +11,18 @@ Il est composé de deux parties : une partie front et une partie back.
 
 #### Front
 
-Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start`
+Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start` (📎Il
+faut lancer le back avant le front sinon react vole le port 3000 utiliser pour
+le serveur back)  
+[Image de l'installation réussit](ReadmeImg/changementdeport.png)
+
+Si vous avez lancer le back il suffit de mettre y pour lancer le serveur react
+sur le port 3001 (si le react tourne sur le 3000 il ne marchera pas)
 
 #### Back
 
-- Aller dans le projet back `cd .\back\` faire `npm i`
+- Aller dans le projet back `cd .\back\` faire `npm i`  
   [Image de l'installation réussit](ReadmeImg/img.png)
-- Si vous n'ave pas cette image ou quelque chose de similaire Vérifier votre
-  version de NodeJS et installer la même version.
 - ensuite, il vous suffit de marque `npm run start`
 
 <details>
@@ -400,5 +404,12 @@ back-end en Node.js avec Express et MongoDB — le système garantit une expéri
 utilisateur fluide et sécurisée grâce à l'utilisation de JWT pour l'
 authentification et d'une architecture API REST bien structurée.
 
+## Remerciment
 
-
+* Théo STOFFELBACH (Oui je m'auto remercie)
+* Nathan Reungoat
+* Ma mère (elle m'a toujours soutenue)
+* Mon père (comme ma mère)
+* Mon chien (support émotionnel)
+* Horizon Forbidden West (J'aime bien)
+* Brotatoes (trés bon jeux aussi)
