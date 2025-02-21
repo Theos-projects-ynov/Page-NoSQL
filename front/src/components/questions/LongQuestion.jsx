@@ -1,18 +1,33 @@
 import React, { useEffect } from 'react';
 
 function LongQuestion({ index, question, setQuestion }) {
-    const [title, setTitle] = React.useState(question[index].title || "");
+    // Initialisation du titre depuis question.title (question est un objet, pas un tableau)
+    const [title, setTitle] = React.useState(question?.title || "");
 
     useEffect(() => {
         console.log("\n\n\nTest:");
-        console.log(question);
+        console.log(question); // Vérifie la structure de la question
     }, [question]);
 
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
-        question[index].title = e.target.value;
-        console.log(title);
-    }
+        const newTitle = e.target.value;
+        setTitle(newTitle); // Mise à jour du titre local
+
+        // Mise à jour du titre dans l'objet question
+        if (question) {
+            question.title = newTitle;
+            console.log("Titre mis à jour : ", newTitle);
+
+            // Envoie la question modifiée au parent via setQuestion
+            setQuestion(prevQuestions => {
+                const updatedQuestions = [...prevQuestions];
+                updatedQuestions[index] = question; // Remplace la question à l'index
+                return updatedQuestions; // Retourne la nouvelle liste de questions
+            });
+        } else {
+            console.error("La question est undefined à l'index", index);
+        }
+    };
 
     return (
         <>
@@ -22,14 +37,14 @@ function LongQuestion({ index, question, setQuestion }) {
                     type="text"
                     value={title}
                     onChange={handleChangeTitle}
-                    style={{ flex: 1 }} // Cela permet à l'input d'occuper l'espace disponible
+                    style={{ flex: 1 }}
                 />
             </div>
             <p>Question {index + 1}</p>
 
-            <p><textarea /> </p>
-            {/*<p>{`Description: ${question.description}`}</p>*/}
-            {/* Vous pouvez ajouter plus de champs pour modifier la question ici */}
+            <p>
+                <textarea />
+            </p>
             <br />
         </>
     );

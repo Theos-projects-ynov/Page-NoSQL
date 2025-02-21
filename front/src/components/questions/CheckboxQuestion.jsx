@@ -1,47 +1,55 @@
 import React, { useState } from 'react';
 
-function CheckboxQuestion({index, question, setQuestion}) {
-    const [title, setTitle] = useState(question[index].title || "");
-    const [checkboxes, setCheckboxes] = useState(question[index].options || {});
+function CheckboxQuestion({ index, question, setQuestion }) {
+    const [title, setTitle] = useState(question?.title || "");
+    const [checkboxes, setCheckboxes] = useState(question?.options || {});
     const [inputText, setInputText] = useState('');
 
     // Fonction pour ajouter une nouvelle case à cocher
     const addCheckbox = () => {
         if (inputText.trim() === '') return; // Empêche d'ajouter une case avec un texte vide
-        const newCheckboxes = {...checkboxes, [inputText]: false};
+        const newCheckboxes = { ...checkboxes, [inputText]: false };
         setCheckboxes(newCheckboxes);
+
         // Mise à jour de l'objet question avec les nouvelles options
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = {
-            ...updatedQuestion[index],
-            options: newCheckboxes
-        };
-        setQuestion(updatedQuestion);
+        const updatedQuestion = { ...question, options: newCheckboxes };
+
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
+
         setInputText(''); // Réinitialise le champ de texte
     };
 
     // Fonction pour mettre à jour l'état d'une case à cocher spécifique
     const handleCheckboxChange = (label) => {
-        const newCheckboxes = {...checkboxes, [label]: !checkboxes[label]};
+        const newCheckboxes = { ...checkboxes, [label]: !checkboxes[label] };
         setCheckboxes(newCheckboxes);
+
         // Mise à jour de l'objet question avec les nouvelles options
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = {
-            ...updatedQuestion[index],
-            options: newCheckboxes
-        };
-        setQuestion(updatedQuestion);
+        const updatedQuestion = { ...question, options: newCheckboxes };
+
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
     };
 
     // Mise à jour du titre et de l'objet question
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = {
-            ...updatedQuestion[index],
-            title: e.target.value
-        };
-        setQuestion(updatedQuestion);
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+
+        const updatedQuestion = { ...question, title: newTitle };
+
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
     };
 
     return (
@@ -53,12 +61,12 @@ function CheckboxQuestion({index, question, setQuestion}) {
                 marginBottom: '10px',
                 marginTop: '10px'
             }}>
-                <p style={{margin: 0}}>Title :</p>
+                <p style={{ margin: 0 }}>Title :</p>
                 <input
                     type="text"
                     value={title}
                     onChange={handleChangeTitle}
-                    style={{flex: 1}}
+                    style={{ flex: 1 }}
                 />
             </div>
             <input
@@ -81,7 +89,7 @@ function CheckboxQuestion({index, question, setQuestion}) {
                             type="checkbox"
                             checked={checkboxes[label]}
                             onChange={() => handleCheckboxChange(label)}
-                            style={{width: 'auto', height: 'auto'}}
+                            style={{ width: 'auto', height: 'auto' }}
                         />
                         <span>{label}</span>
                     </label>

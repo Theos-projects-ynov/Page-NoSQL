@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 function RadioQuestion({ index, question, setQuestion }) {
-    const [title, setTitle] = useState(question[index].title || "");
-    const [radioOptions, setRadioOptions] = useState(question[index].options || {});
+    // Initialisation du titre et des options directement à partir de l'objet question
+    const [title, setTitle] = useState(question?.title || "");
+    const [radioOptions, setRadioOptions] = useState(question?.options || {});
     const [inputText, setInputText] = useState('');
 
     // Fonction pour ajouter une nouvelle option radio
@@ -11,20 +12,32 @@ function RadioQuestion({ index, question, setQuestion }) {
 
         const newOptions = { ...radioOptions, [inputText]: false };
 
-        // Met à jour l'array question avec l'index donné
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = { ...updatedQuestion[index], options: newOptions };
+        // Met à jour l'objet question avec les nouvelles options
+        const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(updatedQuestion);  // Mise à jour du state question
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions; // Retourne la nouvelle liste des questions
+        });
+
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
         setInputText('');              // Réinitialise le champ de texte
     };
 
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
-        question[index].title = e.target.value;
-        console.log("titre : ", title);
-    }
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+
+        // Mise à jour du titre dans l'objet question
+        const updatedQuestion = { ...question, title: newTitle };
+
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
+    };
 
     // Fonction pour gérer la sélection d'une option radio
     const handleRadioChange = (label) => {
@@ -35,11 +48,15 @@ function RadioQuestion({ index, question, setQuestion }) {
             newOptions[key] = key === label;
         });
 
-        // Met à jour l'array question avec l'index donné
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = { ...updatedQuestion[index], options: newOptions };
+        // Met à jour l'objet question avec les nouvelles options
+        const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(updatedQuestion);  // Mise à jour du state question
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
+
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
     };
 
@@ -50,11 +67,15 @@ function RadioQuestion({ index, question, setQuestion }) {
             return acc;
         }, {});
 
-        // Met à jour l'array question avec les options réinitialisées
-        const updatedQuestion = [...question];
-        updatedQuestion[index] = { ...updatedQuestion[index], options: newOptions };
+        // Met à jour l'objet question avec les options réinitialisées
+        const updatedQuestion = { ...question, options: newOptions };
 
-        setQuestion(updatedQuestion);  // Mise à jour du state question
+        setQuestion(prevQuestions => {
+            const updatedQuestions = [...prevQuestions];
+            updatedQuestions[index] = updatedQuestion; // Remplace la question modifiée
+            return updatedQuestions;
+        });
+
         setRadioOptions(newOptions);   // Mise à jour de l'état des options
     };
 
@@ -66,7 +87,7 @@ function RadioQuestion({ index, question, setQuestion }) {
                     type="text"
                     value={title}
                     onChange={handleChangeTitle}
-                    style={{ flex: 1 }} // Cela permet à l'input d'occuper l'espace disponible
+                    style={{ flex: 1 }}
                 />
             </div>
             <input
@@ -85,14 +106,13 @@ function RadioQuestion({ index, question, setQuestion }) {
                             name={`radio-group-${index}`}  // Assurez-vous que tous les radios du même groupe ont le même nom
                             checked={radioOptions[label]}
                             onChange={() => handleRadioChange(label)}
-                            style={{ width: 'auto', height: 'auto' }} // Ne pas laisser l'input radio occuper toute la largeur
+                            style={{ width: 'auto', height: 'auto' }}
                         />
                         <span>{label}</span>
                     </label>
                 ))}
             </div>
 
-            {/* Bouton pour réinitialiser la sélection */}
             <button onClick={handleClearSelection} style={{ marginTop: '10px' }}>
                 Clear Selection
             </button>
