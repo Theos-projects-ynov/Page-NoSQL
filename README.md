@@ -407,9 +407,10 @@ authentification et d'une architecture API REST bien structurée.
 ## Remerciment
 
 * Théo STOFFELBACH (Oui je m'auto remercie)
-* Nathan Reungoat
 * Ma mère (elle m'a toujours soutenue)
 * Mon père (comme ma mère)
 * Mon chien (support émotionnel)
+* Nathan Reungoat
+* Son chien et la moman
 * Horizon Forbidden West (J'aime bien)
 * Brotatoes (trés bon jeux aussi)
