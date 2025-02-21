@@ -18,6 +18,7 @@ function MainRouter() {
             <Routes>
                 <Route path="/login" element={
                     <>
+                        <NavBar/>
                         <Login/>
                     </>
                 }/>

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../Style/formResponse.css";
 
 function FormResponse() {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate(); // Hook pour la redirection
     const [form, setForm] = useState(null);
     const [answers, setAnswers] = useState({});
@@ -54,19 +54,19 @@ function FormResponse() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const responderId = "67b733b2bd3c8f9b9434b8e4"; 
-        const authorFormId = "67b733b2bd3c8f9b9434b8e4";
-        
+        const responderId = "67b733b2bd3c8f9b9434b8e4";
+        const auhtorFormId = "67b733b2bd3c8f9b9434b8e4";
+
         const formattedAnswers = Object.entries(answers).map(([index, userAnswer]) => ({
             id: Number(index),
             userAnswer,
             answer: userAnswer,
         }));
-        
+
         const payload = {
             responderId,
             formId: id,
-            authorFormId,
+            auhtorFormId,
             questions: formattedAnswers,
         };
 
@@ -84,8 +84,7 @@ function FormResponse() {
             }
 
             console.log("Réponses envoyées avec succès !");
-            
-            // Redirection vers la page principale après soumission réussie
+
             navigate("/");
 
         } catch (error) {
@@ -93,7 +92,7 @@ function FormResponse() {
             console.log("Données envoyées : ", {
                 responderId,
                 formId: id,
-                authorFormId,
+                auhtorFormId,
                 questions: formattedAnswers
             });
         }
@@ -105,7 +104,8 @@ function FormResponse() {
 
     return (
         <div className="form-response-container">
-            <img src={form.banner} alt="Bannière" className="form-response-banner" />
+            <img src={form.banner} alt="Bannière"
+                 className="form-response-banner"/>
             <h1>{form.title}</h1>
             <p>{form.description}</p>
 

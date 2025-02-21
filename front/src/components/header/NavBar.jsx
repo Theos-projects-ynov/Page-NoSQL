@@ -21,6 +21,9 @@ const NavBar = () => {
                 <li className="navbar__item">
                     <Link to="/">Home</Link>
                 </li>
+                <li className="navbar__item">
+                    <Link to="/createform">Créer un form</Link>
+                </li>
                 {!isLoggedIn && (
                     <>
                         <li className="navbar__item">

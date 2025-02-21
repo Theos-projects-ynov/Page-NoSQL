@@ -2,9 +2,9 @@ import axios from "axios";
 
 const getMyAnswer = async (idAuthors) => {
     try {
-        const response = await axios.get(`localhost:3000/answer/responder/${idAuthors}`);
+        const response = await axios.get(`http://localhost:3000/answer/responder/${idAuthors}`);
 
-        console.log("response : ", response);
+        console.log("response answer : ", response);
         return response;
     } catch (error) {
         console.error(error);

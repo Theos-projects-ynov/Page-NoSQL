@@ -70,12 +70,28 @@ const getOneAnswerByResponderId = async (req, res) => {
         console.log("getOneAnswerByResponderId : ", req.params);
         const id = req.params.id;
         console.log("Answer id : ", id);
-        const answer = await Answer.findOne({responderId: id}, {}, {});
-        res.status(200).json(answer);
+        const answers = await Answer.find({responderId: id});
+        console.log("answers : ", answers);
+
+        // Pour chaque réponse, on récupère les données du formulaire associé
+        const answersWithFormData = await Promise.all(answers.map(async (a) => {
+            // On renomme la variable pour éviter le conflit avec "res" (response Express)
+            const formData = await Form.findOne({_id: a.formId}, {
+                banner: 1,
+                title: 1,
+                _id: 0
+            });
+
+            // On fusionne la réponse avec les champs récupérés du formulaire
+            // Si a est un document Mongoose, on utilise toObject() pour le convertir en objet JS
+            return {...a.toObject(), ...formData.toObject()};
+        }));
+
+        res.status(200).json(answersWithFormData);
     } catch (error) {
-        res.status(404).json({message: error.message});
+        res.status(500).json({message: error.message});
     }
-}
+};
 
 const getOneAnswerByFormId = async (req, res) => {
     console.log("getOneAnswerByResponderId");

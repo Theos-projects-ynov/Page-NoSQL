@@ -18,7 +18,8 @@ const submitForm = async (data) => {
 const getAllForms = async () => {
     try {
         const response = await axios.get('http://localhost:3000/form');
-        return response.json();
+        console.log("getAllForms : ", response);
+        return response;
     } catch (error) {
         console.error(error);
     }
@@ -27,7 +28,7 @@ const getAllForms = async () => {
 const getMyForms = async (idAuthors) => {
     try {
         const response = await axios.get(`http://localhost:3000/form/author/${idAuthors}`);
-        console.log("response : ", response);
+        console.log("answer : ", response);
         return response;
     } catch (error) {
         console.error(error);
