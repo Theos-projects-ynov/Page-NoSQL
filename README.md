@@ -14,7 +14,7 @@ Il est composé de deux parties : une partie front et une partie back.
 Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start` (📎Il
 faut lancer le back avant le front sinon react vole le port 3000 utiliser pour
 le serveur back)  
-[Image de l'installation réussit](ReadmeImg/changementdeport.png)
+[Image du serveur qui change de port](ReadmeImg/changementdeport.png)
 
 Si vous avez lancer le back il suffit de mettre y pour lancer le serveur react
 sur le port 3001 (si le react tourne sur le 3000 il ne marchera pas)
