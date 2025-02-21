@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../Style/formResponse.css";
+import { jwtDecode } from "jwt-decode";
 
 function FormResponse() {
     const {id} = useParams();
@@ -54,8 +55,13 @@ function FormResponse() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const responderId = "67b733b2bd3c8f9b9434b8e4";
-        const auhtorFormId = "67b733b2bd3c8f9b9434b8e4";
+        console.log("form : ", form);
+
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const responderId = jwtDecode(token).id;
+        const auhtorFormId = form.authorId;
 
         const formattedAnswers = Object.entries(answers).map(([index, userAnswer]) => ({
             id: Number(index),
@@ -97,6 +103,7 @@ function FormResponse() {
             });
         }
     };
+
 
     if (!form) {
         return <p>Chargement...</p>;

@@ -11,6 +11,7 @@ import NavBar from "../components/header/NavBar";
 import UserConnected from "../components/auth/UserConnected";
 import Register from "../Page/Register";
 import FormResponse from "../Page/FormResponse";
+import MyFormsPage from "../Page/MyFormsPage";
 
 function MainRouter() {
     return (
@@ -65,6 +66,15 @@ function MainRouter() {
                         <UserConnected>
                             <NavBar />
                             <FormStats />
+                        </UserConnected>
+                    </>
+                } />
+
+                <Route path="/myformpage" element={
+                    <>
+                        <UserConnected>
+                            <NavBar />
+                            <MyFormsPage />
                         </UserConnected>
                     </>
                 } />
