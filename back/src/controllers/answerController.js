@@ -98,7 +98,7 @@ const getOneAnswerByFormId = async (req, res) => {
     try {
         console.log("getOneAnswerByResponderId : ", req.params);
         const id = req.params.id;
-        const answer = await Answer.findOne({formId: id}, {}, {});
+        const answer = await Answer.find({formId: id}, {}, {});
         res.status(200).json(answer);
     } catch (error) {
         res.status(404).json({message: error.message});
