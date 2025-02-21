@@ -7,6 +7,36 @@ modifier,suppriméer et surtout les remplir.
 
 Il est composé de deux parties : une partie front et une partie back.
 
+## Installation
+
+#### Front
+
+Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start`
+
+#### Back
+
+- Aller dans le projet back `cd .\back\` faire `npm i`
+  [Image de l'installation réussit](ReadmeImg/img.png)
+- Si vous n'ave pas cette image ou quelque chose de similaire Vérifier votre
+  version de NodeJS et installer la même version.
+- ensuite, il vous suffit de marque `npm run start`
+
+<details>
+    <summary>Pssst : il y a un easteregg caché</summary>
+    un easterEgg et caché dans le fichier `package.json` du dossier back
+    mais aussi du coté front dans le fichier `package.json` du dossier front
+</details>
+
+N'oublier pas le .env a mettre a ce niveau :
+[Mettre le .env au niveau de src donc /back/.env](ReadmeImg/oumettredotenv.png)
+avec ce model de donnée
+
+```env
+JWT_SECRET={mot de passe pour le token secret de jwt}
+USERNAMEDB={votre nom de user votre de db}
+PASSWORDDB={votre mot de passe de db}
+```
+
 ## Front
 
 ### Technologie
@@ -16,10 +46,6 @@ Il est composé de deux parties : une partie front et une partie back.
 - CSS / SASS
 - Authentification : Basée sur des tokens JWT
 - Communication avec le Backend : API REST
-
-### Installation
-
-Aller dans le projet front `cd .\front\` faire `npm i` puis `npm start`
 
 ### Structure du projet
 
@@ -112,31 +138,16 @@ pages pour vérifier que l’utilisateur est authentifié.
 
 ## Partie Back
 
+La partie Back est développée avec Node.js, Express et MongoDB (via
+Mongoose).  
+Elle gère trois entités principales : **Utilisateurs**, **Formulaires** et
+**Réponses**.
+
 ### Technologie
 
 - NodeJS (testé avec 2O.11.1 et npm : 10.9.1 )
 - Express
 - Mongoose
-
-### Installation
-
-- Aller dans le projet back `cd .\back\` faire `npm i`
-  [Image de l'installation réussit](ReadmeImg/img.png)
-- Si vous n'ave pas cette image ou quelque chose de similaire Vérifier votre
-  version de NodeJS et installer la même version.
-- ensuite, il vous suffit de marque `npm run start`
-
-<details>
-    <summary>Pssst : il y a un easteregg caché</summary>
-    un easterEgg et caché dans le fichier `package.json` du dossier back
-    mais aussi du coté front dans le fichier `package.json` du dossier front
-</details>
-
-
-La partie Back est développée avec Node.js, Express et MongoDB (via
-Mongoose).  
-Elle gère trois entités principales : **Utilisateurs**, **Formulaires** et
-**Réponses**.
 
 ### Structure du projet
 
